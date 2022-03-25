@@ -69,7 +69,7 @@ def parse_args():
     # Argument parser
     parser = ArgumentParser()
     parser.add_argument('--seed', type=int, default=-1)
-    parser.add_argument("--model-name", type=str, default='brits')
+    parser.add_argument("--model-name", type=str, default='grin')
     parser.add_argument("--dataset-name", type=str, default='air36')
     parser.add_argument("--config", type=str, default=None)
     # Splitting/aggregation params
@@ -107,7 +107,14 @@ def parse_args():
 
     args = parser.parse_args()
     if args.config is not None:
-        with open(args.config, 'r') as fp:
+
+        import os
+        import sys
+        PROJ_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
+        sys.path.append(PROJ_DIR)
+        conf_fp = os.path.join(PROJ_DIR, args.config)
+
+        with open(conf_fp, 'r') as fp:
             config_args = yaml.load(fp, Loader=yaml.FullLoader)
         for arg in config_args:
             setattr(args, arg, config_args[arg])
