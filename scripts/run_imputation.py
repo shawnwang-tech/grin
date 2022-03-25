@@ -32,6 +32,8 @@ def get_model_classes(model_str):
         model, filler = models.BRITSNet, fillers.BRITSFiller
     elif model_str == 'grin':
         model, filler = models.GRINet, fillers.GraphFiller
+    elif model_str == 'ignnk':
+        model, filler = models.IGNNK, fillers.GraphFiller
     elif model_str == 'mpgru':
         model, filler = models.MPGRUNet, fillers.GraphFiller
     elif model_str == 'bimpgru':
